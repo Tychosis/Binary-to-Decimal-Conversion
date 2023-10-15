@@ -1,6 +1,5 @@
-notBin = ['2','3','4','5','6','7','8','9']
-
-def getResponse():                       #Gets response from user and check to make sure its binary
+def getResponse():#Gets response from user and check to make sure its binary
+    notBin = ['2','3','4','5','6','7','8','9']
     while True:                          #Correct response loop
         response = input()
         if response.isdecimal() != True: #Checks to make sure response is number
