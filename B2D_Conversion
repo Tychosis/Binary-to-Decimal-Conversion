@@ -1,0 +1,25 @@
+notBin = ['2','3','4','5','6','7','8','9']
+
+def getResponse():                       #Gets response from user and check to make sure its binary
+    while True:                          #Correct response loop
+        response = input()
+        if response.isdecimal() != True: #Checks to make sure response is number
+            continue
+        else:                            #Checks to make sure only 1s and 0s
+            S1 = set(list(response))     #Creates list of unique values in response
+            S2 = set(notBin)             #Creates set of numbers that are not 1 or 0
+            C1 = S2.intersection(S1)     #Creates set with any shared values between S1 and S2
+            if len(C1) != 0:             #If set is not empty than response contains nonbinary numbers
+                continue
+        return(response, list(response)) #Returns response and response list
+
+
+def start():                              #Converts user input binary number into decimal 
+    decNum = 0
+    response, binNum = getResponse()      #Calls for binary code from user input
+    binNum.reverse()                      #Flips list for easier conversion equation
+    for x in range(len(binNum)):
+        decNum += int(binNum[x]) * 2 ** x #conversion equation
+    print(response + ' = ' + str(decNum)) #prints binary with decimal equivalent
+    
+start()                                 #Starts Binary converter program
