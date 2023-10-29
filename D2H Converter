@@ -1,0 +1,23 @@
+def getResponse():
+    while True:
+        response = input()
+        if response.isdecimal == False:
+            continue
+        return(int(response))
+
+def convertToHex():
+    Hex = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'} 
+    hexList = []
+    n = getResponse()
+    while n > 0:
+        if n % 16 <= 9:
+            hexList.append(str(n % 16))
+        else:
+            hexList.append(Hex[n % 16])
+        n = n // 16
+    hexList.reverse()
+    return(hexList)
+
+while True:
+    ans = convertToHex()
+    print(''.join(ans))
