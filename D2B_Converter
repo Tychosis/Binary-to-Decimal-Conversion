@@ -1,0 +1,22 @@
+def getResponse():                        # Validate response is number for conversion
+    while True:
+        response = input()
+        if response.isdecimal == False:
+            continue
+        return(int(response))
+
+def convertToBinary():                    # Converts decimal to binary starting with least significant bit
+    biList = []
+    n = getResponse()
+    while n > 0:
+        if n % 2 > 0:
+            biList.append('1')
+        else:
+            biList.append('0')
+        n = n // 2
+    biList.reverse()                      # Orders binary number from most significant bit to least significant.
+    return(biList)                        # Returns converted binary number
+
+While True:
+  ans = convertToBinary()                   # Calls for decimal to binary conversion
+  print(''.join(ans))                       # Prints answer in binary format
