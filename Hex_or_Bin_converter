@@ -1,0 +1,74 @@
+import re
+
+notBin = ['2','3','4','5','6','7','8','9']
+binaryHex = {'0': '0000', '1': '0001', '2': '0010', '3': '0011',
+    '4': '0100', '5': '0101', '6': '0110', '7': '0111', '8': '1000',
+    '9': '1001', 'A': '1010', 'B': '1011', 'C': '1100', 'D': '1101',
+    'E': '1110', 'F': '1111'}
+
+def getChoice():
+    while True:
+        print("""Would you like to convert a number from HEXidecimal to binary\n
+    or BINary to hexidecimal?""")
+        response = input()
+        if response.upper() == 'HEX':
+            ans = getBinary()
+        elif response.upper() == 'BIN':
+            ans = getHex()
+        else:
+            continue
+        return(ans)
+    
+
+def getResponseBin():                    #Gets response from user and check to make sure its binary
+    notBin = ['2','3','4','5','6','7','8','9']
+    while True:                          #Correct-response loop
+        print('Type a binary number')
+        response = input()
+        if response.isdecimal() != True: #Checks to make sure response is number
+            continue
+        else:                            #Checks to make sure only 1s and 0s
+            S1 = set(list(response))     #Creates list of unique values in response
+            S2 = set(notBin)             #Creates set of numbers that are not 1 or 0
+            C1 = S2.intersection(S1)     #Creates set with any shared values between S1 and S2
+            if len(C1) != 0:             #If set is not empty than response contains nonbinary numbers
+                continue
+        return(response)
+    
+def getResponseHex():
+    while True:
+        print('Type a hexidecimal number')
+        response = input()
+        S1 = set(list(response.upper()))
+        S2 = set(list(binaryHex))
+        for x in S1:
+            if x not in S2:
+                break
+        if x not in S2:
+            continue
+        else:
+            return(response.upper())
+
+def getBinary():
+    h = getResponseHex()
+    b = []
+    for i in list(h):
+        b.append(binaryHex[i])
+    return(b)
+
+def getHex():
+    ans = []
+    hexRegex = re.compile(r'\d\d\d\d')
+    b = getResponseBin()
+    if len(b) % 4 != 0:
+        b = '0'*(4 - (len(b) % 4)) + b 
+    h = hexRegex.findall(b)
+    for i in h:
+        for value in binaryHex:
+            if i == binaryHex[value]:
+                ans.append(value)
+                break
+    return(ans)
+
+ans = getChoice()
+print(''.join(ans))
